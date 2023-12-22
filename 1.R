@@ -76,4 +76,14 @@ position
 submatrix[j, position] = subsubdat[k,4]
 head(submatrix)
 
+#資料轉換概念(6)
+#現在，我們可以將要對subsubdat中所做的事情打包成一個迴圈如下，這樣第一個時間點就完成了
+#subsubdat #先看看subsubdat裡面有哪些
+
+for (k in 1:nrow(subsubdat)) {
+  NAME = subsubdat[k,3]
+  position = which(NAME == levels.TESTNAME) + 2
+  submatrix[j, position] = subsubdat[k,4]
+}
+head(submatrix)
 
