@@ -87,3 +87,16 @@ for (k in 1:nrow(subsubdat)) {
 }
 head(submatrix)
 
+#資料轉換概念(7)
+#由於這是一個人中一個時間點的迴圈，我們可以把一整個迴圈打包在另一個迴圈之下
+for (j in 1:n.COLLECTIONDATE) {
+  subsubdat = subdat[subdat[,2]==levels.COLLECTIONDATE[j],]
+  for (k in 1:nrow(subsubdat)) {
+    NAME = subsubdat[k,3]
+    position = which(NAME == levels.TESTNAME) + 2
+    submatrix[j, position] = subsubdat[k,4]
+  }
+}
+
+head(submatrix)
+
