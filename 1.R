@@ -21,4 +21,22 @@ levels.PATNUMBER
 n.PATNUMBER = length(levels.PATNUMBER)
 n.PATNUMBER
 
+#資料轉換概念(3)
+#我們只先做一個個案，之後再想辦法利用迴圈把它全部都做完就好
+#在寫迴圈時，我習慣先在起頭令迴圈變數為1，如果這段以後能執行，那應該整個迴圈都不會有問題
+
+#我們先把個案1的資料先切割出來
+i = 1
+subdat = dat[dat[,1]==levels.PATNUMBER[i],]
+#接著，我們再取得subdat中的一些資訊，主要就是他總共測了幾次
+levels.COLLECTIONDATE = levels(as.factor(subdat[,2]))
+n.COLLECTIONDATE = length(levels.COLLECTIONDATE)
+n.COLLECTIONDATE
+
+#有沒有發現他好像測量太多次了？這是因為我們將檔案切割成subdat時，第二欄的因子向量仍然記得他以前有多少個類別，因此我們要先把它的記憶洗掉。洗掉的方法有很多種，如先轉換成文字向量，再轉換回因子向量
+subdat[,2] = as.factor(as.character(subdat[,2]))
+levels.COLLECTIONDATE = levels(subdat[,2])
+n.COLLECTIONDATE = length(levels.COLLECTIONDATE)
+n.COLLECTIONDATE
+
 
