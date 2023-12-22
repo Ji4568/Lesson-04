@@ -57,3 +57,23 @@ head(submatrix)
 j = 1
 subsubdat = subdat[subdat[,2]==levels.COLLECTIONDATE[j],]
 subsubdat
+
+#資料轉換概念(5)
+#我們需要這份小資料中每列都執行下列的事項
+#找出這列是描述哪個生化值
+#找出在submatrix中這個生化值的位置
+#把value填入那個位置
+#同樣，我們可以再開一個迴圈執行這個部分，這次這個迴圈的迴圈變數命為k
+#函數「which()」可以幫我們找位置
+
+k = 1
+NAME = subsubdat[k,3]
+NAME
+
+position = which(NAME == levels.TESTNAME) + 2 
+position
+
+submatrix[j, position] = subsubdat[k,4]
+head(submatrix)
+
+
