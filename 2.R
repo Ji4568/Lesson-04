@@ -105,4 +105,26 @@ class(L1)
 names(L1) = c("D", "E", "F")
 L1
 
+#列表(List)層物件基本介紹(6)
+#接著我們還能寫自訂函數「summary.XXX()」來呈現更詳細的資料
+#在寫之前我們先看看直接對L1使用函數「summary()」會怎樣
+
+summary(L1)
+
+#現在我們可以讓函數「summary()」使用後產生不同的結果
+
+#先寫一個自訂函數「summary.test()」
+summary.test = function(test) {
+  cat("此列表共有",length(test),"個物件\n")
+  cat("物件名稱分別為：\n")
+  cat(paste(names(test), collapse = ", "), "\n")
+  for (i in 1:length(test)) {
+    cat(names(test)[i], "之物件屬性為", class(test[[i]]), "\n")
+  }
+}
+
+#再看看使用函數「summary()」後會變什麼
+summary(L1)
+
+
 
