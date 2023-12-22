@@ -82,6 +82,27 @@ L1
 
 #小提示：當你使用函數「class()」可以查詢該物件的屬性，若非常見的幾種屬性名稱，那就非常有可能是S3物件(S3 class)或S4物件(S4 class)
 
+#列表(List)層物件基本介紹(5)
+#轉變為S3物件(S3 class)後，我們可以透過自訂函數「print.XXX()」、自訂函數「summary.XXX()」等函數來讓R知道要如何呈現這個S3物件
+#先寫一個自訂函數「print.test()」
+print.test = function(test) {
+  cat("此列表共有",length(test),"個物件\n")
+  cat("物件名稱分別為：\n")
+  cat(paste(names(test), collapse = ", "), "\n")
+}
 
+#再看看請R列印出L1會變什麼
+L1
+
+#列表(list)的幾個常見函數還是能夠使用：
+
+ls(L1)
+
+length(L1)
+
+class(L1)
+
+names(L1) = c("D", "E", "F")
+L1
 
 
