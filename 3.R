@@ -46,3 +46,50 @@ for (i in 1:4000) {
 
 Sys.time() - t0 #用現在時間減去開始時間
 
+#用列表特性加速任務(2)
+#讓我們用列表來解決這個問題吧！
+#這是連續合併1000次的耗時：
+
+t0 = Sys.time()
+
+base_dat = data.frame(X = rnorm(20), Y = rnorm(20))
+dat_list = list()
+
+for (i in 1:1000) {
+  
+  dat_list[[i]] = base_dat
+  
+}
+
+Sys.time() - t0 #用現在時間減去開始時間
+
+#這是連續合併2000次的耗時：
+
+t0 = Sys.time()
+
+base_dat = data.frame(X = rnorm(20), Y = rnorm(20))
+dat_list = list()
+
+for (i in 1:2000) {
+  
+  dat_list[[i]] = base_dat
+  
+}
+
+Sys.time() - t0 #用現在時間減去開始時間
+
+#這是連續合併4000次的耗時：
+
+t0 = Sys.time()
+
+base_dat = data.frame(X = rnorm(20), Y = rnorm(20))
+dat_list = list()
+
+for (i in 1:4000) {
+  
+  dat_list[[i]] = base_dat
+  
+}
+
+Sys.time() - t0 #用現在時間減去開始時間
+
