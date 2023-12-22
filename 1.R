@@ -133,3 +133,38 @@ final.data
 final.data = rbind(final.data, submatrix)
 head(final.data)
 
+#資料轉換概念(9)
+#完整的程式碼如下，各位同學能夠自己試試。
+levels.TESTNAME = levels(dat[,3])
+n.TESTNAME = length(levels.TESTNAME)
+levels.PATNUMBER = levels(as.factor(dat[,1]))
+n.PATNUMBER = length(levels.PATNUMBER)
+
+final.data = NULL
+
+for (i in 1:n.PATNUMBER) {
+  subdat = dat[dat[,1]==levels.PATNUMBER[i],]
+  subdat[,2] = as.factor(as.character(subdat[,2]))
+  levels.COLLECTIONDATE = levels(subdat[,2])
+  n.COLLECTIONDATE = length(levels.COLLECTIONDATE)
+  
+  submatrix = matrix(NA, nrow = n.COLLECTIONDATE, ncol = n.TESTNAME+2)
+  colnames(submatrix) = c("PATNUMBER", "COLLECTIONDATE", levels.TESTNAME)
+  
+  submatrix[,1] = levels.PATNUMBER[i]
+  submatrix[,2] = levels.COLLECTIONDATE
+  
+  for (j in 1:n.COLLECTIONDATE) {
+    subsubdat = subdat[subdat[,2]==levels.COLLECTIONDATE[j],]
+    for (k in 1:nrow(subsubdat)) {
+      NAME = subsubdat[k,3]
+      position = which(NAME == levels.TESTNAME) + 2
+      submatrix[j, position] = subsubdat[k,4]
+    }
+  }
+  
+  final.data = rbind(final.data, submatrix)
+}
+
+head(final.data)
+
