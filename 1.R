@@ -39,4 +39,21 @@ levels.COLLECTIONDATE = levels(subdat[,2])
 n.COLLECTIONDATE = length(levels.COLLECTIONDATE)
 n.COLLECTIONDATE
 
+#資料轉換概念(4)
+#接著，我們先建立一個矩陣讓我們填資料
+#第一欄填ID，第二欄填上這個人所有測量的時間點
 
+submatrix = matrix(NA, nrow = n.COLLECTIONDATE, ncol = n.TESTNAME+2)
+colnames(submatrix) = c("PATNUMBER", "COLLECTIONDATE", levels.TESTNAME)
+
+submatrix[,1] = levels.PATNUMBER[i]
+submatrix[,2] = levels.COLLECTIONDATE
+
+head(submatrix)
+
+#接著，我們開始能一個時間點一個時間點分析了，我們能把subdat在切割出更細的subsubdat
+#同樣的，我們先看第一個時間點，注意迴圈變數不要重複，所以剛剛設i，這次我們設j
+
+j = 1
+subsubdat = subdat[subdat[,2]==levels.COLLECTIONDATE[j],]
+subsubdat
