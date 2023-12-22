@@ -100,3 +100,36 @@ for (j in 1:n.COLLECTIONDATE) {
 
 head(submatrix)
 
+#資料轉換概念(8)
+#現在我們整理一下對於第一個人所使用到的所有程式碼，接著我們即將要讓電腦重複10次(因為有10個人)
+#下列這串程式碼可以獲得一個完整的submatrix
+
+i = 1
+
+subdat = dat[dat[,1]==levels.PATNUMBER[i],]
+subdat[,2] = as.factor(as.character(subdat[,2]))
+levels.COLLECTIONDATE = levels(subdat[,2])
+n.COLLECTIONDATE = length(levels.COLLECTIONDATE)
+n.COLLECTIONDATE
+
+submatrix = matrix(NA, nrow = n.COLLECTIONDATE, ncol = n.TESTNAME+2)
+colnames(submatrix) = c("PATNUMBER", "COLLECTIONDATE", levels.TESTNAME)
+
+submatrix[,1] = levels.PATNUMBER[i]
+submatrix[,2] = levels.COLLECTIONDATE
+
+for (j in 1:n.COLLECTIONDATE) {
+  subsubdat = subdat[subdat[,2]==levels.COLLECTIONDATE[j],]
+  for (k in 1:nrow(subsubdat)) {
+    NAME = subsubdat[k,3]
+    position = which(NAME == levels.TESTNAME) + 2
+    submatrix[j, position] = subsubdat[k,4]
+  }
+}
+#然而，我們必須要把submatrix寫出到完整的大表，否則i只要一改變，將會重新建立一個新的submatrix，我們可以透過函數「rbind()」完成，但在最開始的時候甚麼東西都沒有，所以我們要先令一個東西起始為NULL，然後這個東西會隨著迴圈不斷地長大
+final.data = NULL
+final.data
+
+final.data = rbind(final.data, submatrix)
+head(final.data)
+
